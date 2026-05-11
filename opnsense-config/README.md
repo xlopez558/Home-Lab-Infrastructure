@@ -6,11 +6,11 @@ To establish secure routing and isolate my lab services from standard local traf
 ## Implementation Steps
 * **Virtualization & Routing:**
   * Deployed OPNsense as a VM, managing virtualized interfaces and disabling the default Proxmox firewall on specific bridges to prevent routing conflicts.
-* **VLAN Segmentation & DMZ:**
-  * Configured distinct Virtual LANs (VLANs) to separate traffic into dedicated broadcast domains.
-  * Established a dedicated **Management VLAN** for infrastructure control and an isolated **DMZ** for web-facing services.
+* **Bridge Segmentation & DMZ:**
+  * Configured distinct Linux bridges (e.g., `vmbr2`) to act as isolated virtual switches, separating traffic into dedicated broadcast domains without relying on hypervisor-level VLAN tagging.
+  * Established a dedicated Management Subnet for infrastructure control and an isolated **DMZ** for web-facing services.
 * **Access Control & Security Rules:**
-  * Implemented strict RFC1918 firewall rules to block unauthorized cross-talk between subnets.
+  * Implemented strict RFC1918 firewall rules in OPNsense to block unauthorized cross-talk between the isolated bridges.
   * Utilized a Linux Mint VM as a secure "jump box," ensuring administrative access to the infrastructure is tightly controlled and isolated from general network traffic.
 
 ## Outcome
